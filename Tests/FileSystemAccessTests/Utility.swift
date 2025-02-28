@@ -36,12 +36,9 @@ final class TempDirRegistry {
     }
 
     deinit {
-        guard items.isEmpty else {
-            for item in items {
-                let url = baseURL.appending(component: "filesystemaccess_test_" + item.uuidString)
-                try? fileManager.removeItem(at: url)
-            }
-            fatalError("Did not tearDown")
+        for item in items {
+            let url = baseURL.appending(component: "filesystemaccess_test_" + item.uuidString)
+            try! fileManager.removeItem(at: url)
         }
     }
 }

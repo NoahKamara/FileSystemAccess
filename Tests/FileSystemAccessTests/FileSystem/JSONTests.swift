@@ -18,10 +18,6 @@ final class FileSystemJSONTests {
         var isSubscribed: Bool = true
     }
 
-    deinit {
-        try! tempDir.tearDown()
-    }
-
     @Test
     func write() async throws {
         let fileManager = FileManager.default

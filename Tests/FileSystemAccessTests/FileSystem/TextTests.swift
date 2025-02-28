@@ -12,10 +12,6 @@ import Testing
 final class FileSystemTextTests {
     let tempDir: TempDirRegistry = .init()
 
-    deinit {
-        try! tempDir.tearDown()
-    }
-
     @Test(arguments: stringEncodings)
     func write(encoding: String.Encoding) async throws {
         let fileManager = FileManager.default

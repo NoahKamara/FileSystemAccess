@@ -12,10 +12,6 @@ import Testing
 final class FileSystemDataTests {
     let tempDir: TempDirRegistry = .init()
 
-    deinit {
-        try! tempDir.tearDown()
-    }
-
     @Test
     func write() async throws {
         let fileManager = FileManager.default
