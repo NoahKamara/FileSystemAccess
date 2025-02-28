@@ -8,12 +8,12 @@
 import Foundation
 import Testing
 
-@Suite("TemporaryDirectory")
-struct TemporaryDirectoryTests {
+@Suite("TemporaryFileSystem")
+struct TemporaryFileSystemTests {
     @Test
     func test() async throws {
         let fileManager = FileManager.default
-        let tempDir = try TemporaryDirectory()
+        let tempDir = try TemporaryFileSystem()
 
         var isDirectory = ObjCBool(booleanLiteral: false)
         let fileExistsAtPath = fileManager.fileExists(

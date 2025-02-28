@@ -6,7 +6,7 @@
 
 import Foundation
 
-public final class TemporaryDirectory: FileSystem, @unchecked Sendable {
+public final class TemporaryFileSystem: FileSystem, @unchecked Sendable {
     let rootDirectory: URL
 
     public init(fileManager: FileManager = .default) throws {
@@ -28,25 +28,3 @@ public final class TemporaryDirectory: FileSystem, @unchecked Sendable {
     }
 }
 
-// public final class TemporaryDirectory: FileSystem, Sendable {
-//    init(_ name: String?) {
-//        let url = URL.temporaryDirectory.appending(component: uniqueName(name))
-//        super.init(realURL: url)
-//    }
-//
-//    deinit {
-//
-//    }
-// }
-//
-//
-// func uniqueName(_ name: String?) -> String {
-//    let uuid = UUID().uuidString
-//
-//    if let name {
-//         // Take first 8 characters of UUID
-//        return "\(name)_\(uuid.prefix(8))"
-//    } else {
-//        return uuid
-//    }
-// }
