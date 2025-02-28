@@ -4,21 +4,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "FSNamespace",
+    name: "FileSystemAccess",
+    platforms: [.macOS(.v14), .iOS(.v16)],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "FSNamespace",
-            targets: ["FSNamespace"]),
+            name: "FileSystemAccess",
+            targets: ["FileSystemAccess"]
+        ),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "FSNamespace"),
+            name: "FileSystemAccess"
+        ),
         .testTarget(
-            name: "FSNamespaceTests",
-            dependencies: ["FSNamespace"]
+            name: "FileSystemAccessTests",
+            dependencies: ["FileSystemAccess"]
         ),
     ]
 )
