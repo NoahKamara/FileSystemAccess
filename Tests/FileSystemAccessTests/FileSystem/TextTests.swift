@@ -1,18 +1,16 @@
 //
-//  File 2.swift
-//  FileSystemAccess
+//  TextTests.swift
 //
-//  Created by Noah Kamara on 28.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
+@testable import FileSystemAccess
 import Foundation
 import Testing
-@testable import FileSystemAccess
 
 @Suite("Text", .tags(.fileSystemIO))
 final class FileSystemTextTests {
-    
-    let tempDir: TempDirRegistry = TempDirRegistry()
+    let tempDir: TempDirRegistry = .init()
 
     deinit {
         try! tempDir.tearDown()
@@ -44,7 +42,7 @@ final class FileSystemTextTests {
         let fileData = try Data(contentsOf: fileURL)
         #expect(fileData == text.data(using: encoding))
     }
-    
+
     @Test(arguments: stringEncodings)
     func read(encoding: String.Encoding) async throws {
         let fileManager = FileManager.default
@@ -64,8 +62,7 @@ final class FileSystemTextTests {
     }
 }
 
-
-fileprivate let stringEncodings: Set<String.Encoding> = [
+private let stringEncodings: Set<String.Encoding> = [
     .ascii,
     .nextstep,
     .japaneseEUC,
@@ -87,5 +84,5 @@ fileprivate let stringEncodings: Set<String.Encoding> = [
     .utf16LittleEndian,
     .utf32,
     .utf32BigEndian,
-    .utf32LittleEndian
+    .utf32LittleEndian,
 ]

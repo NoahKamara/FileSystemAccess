@@ -1,6 +1,12 @@
-import Testing
+//
+//  SafeguardTests.swift
+//
+//  Copyright © 2024 Noah Kamara.
+//
+
 @testable import FileSystemAccess
 import Foundation
+import Testing
 
 extension URL {
     static let devNull = URL(filePath: "/dev/null")
@@ -9,13 +15,13 @@ extension URL {
 @Suite("Safeguard")
 struct SafeguardTests {
     let fileSystem = FileSystem(realURL: URL.devNull)
-    
+
     @Test(arguments: [
         // with leading slash
         "/",
         "/file",
         "/folder/",
-        
+
         // without leading slash
         "",
         "file",
@@ -25,7 +31,7 @@ struct SafeguardTests {
     func validPathAccess(path: String) async throws {
         try self.fileSystem.safeguard(path, access: { _, _ in })
     }
-    
+
     @Test(arguments: [
         ("/folder/..", true),
         ("/folder/folder/../..", true),
@@ -41,7 +47,7 @@ struct SafeguardTests {
             try self.fileSystem.safeguard(path, access: { _, _ in })
             return
         }
-        
+
         #expect(performing: {
             try self.fileSystem.safeguard(path, access: { _, _ in })
         }, throws: { error in

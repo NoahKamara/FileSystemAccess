@@ -1,17 +1,15 @@
 //
-//  File 2.swift
-//  FileSystemAccess
+//  TemporaryDirectoryTests.swift
 //
-//  Created by Noah Kamara on 28.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
+@testable import FileSystemAccess
 import Foundation
 import Testing
-@testable import FileSystemAccess
 
 @Suite("TemporaryDirectory")
 struct TemporaryDirectoryTests {
-    
     @Test
     func test() async throws {
         let fileManager = FileManager.default
@@ -33,10 +31,10 @@ struct TemporaryDirectoryTests {
             at: URL(filePath: testFileURL.lastPathComponent),
             contents: testFileData
         )
-        
+
         let fileData = try Data(contentsOf: testFileURL)
         #expect(fileData == testFileData)
-        
+
         try tempDir.destroy()
         let leftAfterDestroy = fileManager.fileExists(atPath: tempDir.rootDirectory.path())
         #expect(!leftAfterDestroy)

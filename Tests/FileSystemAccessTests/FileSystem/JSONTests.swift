@@ -1,17 +1,16 @@
 //
-//  File.swift
-//  FileSystemAccess
+//  JSONTests.swift
 //
-//  Created by Noah Kamara on 28.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
+@testable import FileSystemAccess
 import Foundation
 import Testing
-@testable import FileSystemAccess
 
 @Suite("JSON", .tags(.fileSystemIO))
 final class FileSystemJSONTests {
-    let tempDir: TempDirRegistry = TempDirRegistry()
+    let tempDir: TempDirRegistry = .init()
 
     struct ExampleJSON: Equatable, Codable {
         var name: String = "John Doe"
@@ -68,4 +67,3 @@ final class FileSystemJSONTests {
         #expect(contents == json)
     }
 }
-

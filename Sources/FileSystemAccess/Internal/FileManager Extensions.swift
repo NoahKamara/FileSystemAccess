@@ -1,12 +1,10 @@
 //
-//  File.swift
-//  FSNamespace
+//  FileManager Extensions.swift
 //
-//  Created by Noah Kamara on 27.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
 import Foundation
-
 
 extension FileManager {
     /// Returns a Boolean value that indicates whether a directory exists at a specified path.

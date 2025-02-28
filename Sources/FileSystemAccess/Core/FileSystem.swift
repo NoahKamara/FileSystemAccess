@@ -1,8 +1,7 @@
 //
-//  File.swift
-//  FSNamespace
+//  FileSystem.swift
 //
-//  Created by Noah Kamara on 27.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
 import Foundation
@@ -11,16 +10,15 @@ import Foundation
 public class FileSystem: @unchecked Sendable {
     fileprivate let fileManager: FileManager
     fileprivate let realURL: URL
-    
-    public var name: String { realURL.lastPathComponent }
-    public var fileExtension: String { realURL.pathExtension }
+
+    public var name: String { self.realURL.lastPathComponent }
+    public var fileExtension: String { self.realURL.pathExtension }
 
     public init(realURL: URL, fileManager: FileManager = .default) {
         self.fileManager = fileManager
         self.realURL = realURL.absoluteURL
     }
 }
-
 
 extension FileSystem {
     @inline(__always)
@@ -30,15 +28,15 @@ extension FileSystem {
     ) throws -> T {
         try self.safeguard(URL(filePath: path), access: access)
     }
-    
+
     @inline(__always)
     func safeguard<T>(_ url: URL, access: (URL, FileManager) throws -> T) throws -> T {
         precondition(url.isFileURL, "url must be file-url")
-        
+
         let rootPath = self.realURL.path()
         let realAccessURL = self.realURL.appending(path: url.path()).resolvingSymlinksInPath()
         let accessPath = realAccessURL.path()
-        
+
         guard accessPath.hasPrefix(rootPath) else {
             throw SafeguardFailure(accessPath: url.path())
         }
@@ -50,7 +48,7 @@ extension FileSystem {
         let accessPath: String
 
         var errorDescription: String {
-            "SafeguardFailure: Prevented access of unsafe file system path '\(accessPath)'"
+            "SafeguardFailure: Prevented access of unsafe file system path '\(self.accessPath)'"
         }
     }
 }

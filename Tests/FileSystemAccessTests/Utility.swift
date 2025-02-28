@@ -1,18 +1,15 @@
 //
-//  File.swift
-//  FileSystemAccess
+//  Utility.swift
 //
-//  Created by Noah Kamara on 28.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
 import Foundation
 import Testing
 
-
 extension Tag {
     @Tag static var fileSystemIO: Tag
 }
-
 
 final class TempDirRegistry {
     let baseURL = URL.temporaryDirectory
@@ -21,20 +18,20 @@ final class TempDirRegistry {
     var items: Set<UUID> = .init()
 
     private func makeURL(id: UUID) -> URL {
-        baseURL.appending(component: "filesystemaccess_test_" + id.uuidString)
+        self.baseURL.appending(component: "filesystemaccess_test_" + id.uuidString)
     }
 
     func create() throws -> URL {
         let id = UUID()
-        let url = makeURL(id: id)
-        try fileManager.createDirectory(at: url, withIntermediateDirectories: false)
-        items.insert(id)
+        let url = self.makeURL(id: id)
+        try self.fileManager.createDirectory(at: url, withIntermediateDirectories: false)
+        self.items.insert(id)
         return url
     }
 
     func tearDown() throws {
         while let item = items.popFirst() {
-            try fileManager.removeItem(at: makeURL(id: item))
+            try self.fileManager.removeItem(at: self.makeURL(id: item))
         }
     }
 

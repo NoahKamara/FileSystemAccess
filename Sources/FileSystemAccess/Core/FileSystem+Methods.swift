@@ -1,8 +1,7 @@
 //
-//  File.swift
-//  FSNamespace
+//  FileSystem+Methods.swift
 //
-//  Created by Noah Kamara on 27.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
 import Foundation
@@ -23,10 +22,10 @@ public extension FileSystem {
     ) throws {
         if createIntermediateDirs, url.pathComponents.count > 1 {
             let parentURL = url.deletingLastPathComponent()
-            
+
             try safeguard(parentURL) { url, fileManager in
                 let fileExists = fileManager.directoryExists(atPath: url.path())
-                
+
                 if !fileExists {
                     try fileManager.createDirectory(at: url, withIntermediateDirectories: true)
                 }
@@ -36,19 +35,17 @@ public extension FileSystem {
         try self.safeguard(url) { url, _ in
             try contents.write(to: url)
         }
-        
     }
-    
+
     /// Returns the contents at the specified url
     /// - Parameters:
     ///   - url: The url of the file whose contents you want.
     func contents(of url: URL) throws -> Data {
-        return try self.safeguard(url) { url, fileManager in
+        try self.safeguard(url) { url, fileManager in
             try fileManager.contents(of: url)
         }
     }
 }
-
 
 // MARK: JSON Codable
 
@@ -101,7 +98,7 @@ public extension FileSystem {
         guard let data = text.data(using: encoding) else {
             throw StringEncodingError()
         }
-        
+
         try self.createFile(at: url, contents: data, createIntermediateDirs: createIntermediateDirs)
     }
 
@@ -123,11 +120,10 @@ public extension FileSystem {
     }
 }
 
-
-//public extension FileSystemAccess {
+// public extension FileSystemAccess {
 //    func hierarchy() throws -> FSNode {
 //        try safeguard(url) { url, fileManager in
 //            try FSNode.buildTree(root: url, fileManager: fileManager)
 //        }
 //    }
-//}
+// }

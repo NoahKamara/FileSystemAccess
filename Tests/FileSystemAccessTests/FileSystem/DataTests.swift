@@ -1,17 +1,16 @@
 //
-//  File 2.swift
-//  FileSystemAccess
+//  DataTests.swift
 //
-//  Created by Noah Kamara on 28.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
+@testable import FileSystemAccess
 import Foundation
 import Testing
-@testable import FileSystemAccess
 
 @Suite("Data", .tags(.fileSystemIO))
 final class FileSystemDataTests {
-    let tempDir: TempDirRegistry = TempDirRegistry()
+    let tempDir: TempDirRegistry = .init()
 
     deinit {
         try! tempDir.tearDown()
@@ -39,7 +38,7 @@ final class FileSystemDataTests {
         let fileData = try Data(contentsOf: fileURL)
         #expect(fileData == data)
     }
-    
+
     @Test
     func writeIntermediate() async throws {
         let fileManager = FileManager.default
@@ -66,7 +65,6 @@ final class FileSystemDataTests {
         let fileData = try Data(contentsOf: fileURL)
         #expect(fileData == data)
     }
-
 
     @Test
     func read() async throws {

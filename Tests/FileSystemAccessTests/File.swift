@@ -1,9 +1,7 @@
 //
 //  File.swift
-//  FileSystemAccess
 //
-//  Created by Noah Kamara on 28.02.2025.
+//  Copyright © 2024 Noah Kamara.
 //
 
 import Testing
-
