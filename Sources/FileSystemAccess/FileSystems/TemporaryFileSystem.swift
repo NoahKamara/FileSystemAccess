@@ -7,7 +7,7 @@
 import Foundation
 
 public final class TemporaryFileSystem: FileSystem, @unchecked Sendable {
-    let rootDirectory: URL
+    public let rootDirectory: URL
 
     public init(fileManager: FileManager = .default) throws {
         let rootDirectory = URL
@@ -19,7 +19,7 @@ public final class TemporaryFileSystem: FileSystem, @unchecked Sendable {
         super.init(realURL: rootDirectory, fileManager: fileManager)
     }
 
-    consuming func destroy(fileManager: FileManager = .default) throws {
+    public consuming func destroy(fileManager: FileManager = .default) throws {
         try fileManager.removeItem(at: self.rootDirectory)
     }
 
